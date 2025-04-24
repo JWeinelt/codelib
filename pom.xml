@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.codeblocksmc.codelib</groupId>
+  <artifactId>CodeLib</artifactId>
+  <version>3.3.1</version> <!-- When uploading, please also use LATEST -->
+    <!-- 3.3.0 -->
+  <packaging>jar</packaging>
+
+  <name>CodeLib</name>
+
+  <properties>
+    <java.version>21</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>codeblocksmc-repo</id>
+            <url>https://repo.codeblocksmc.de/releases</url>
+        </repository>
+    </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>16</source>
+          <target>16</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+
+  <repositories>
+      <repository>
+          <id>papermc-repo</id>
+          <url>https://repo.papermc.io/repository/maven-public/</url>
+      </repository>
+      <repository>
+          <id>sonatype</id>
+          <url>https://oss.sonatype.org/content/groups/public/</url>
+      </repository>
+      <repository>
+          <id>simonsators-repo</id>
+          <url>https://simonsator.de/repo/</url>
+      </repository>
+  </repositories>
+
+  <dependencies>
+      <dependency>
+          <groupId>io.papermc.paper</groupId>
+          <artifactId>paper-api</artifactId>
+          <version>1.20.4-R0.1-SNAPSHOT</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>io.github.leonardosnt</groupId>
+          <artifactId>bungeechannelapi</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>fr.mrmicky</groupId>
+          <artifactId>fastboard</artifactId>
+          <version>2.1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.30</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>de.simonsator</groupId>
+          <artifactId>spigot-party-api-for-party-and-friends</artifactId>
+          <version>1.0.4-RELEASE</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>de.simonsator</groupId>
+          <artifactId>Party-and-Friends-MySQL-Edition-Spigot-API</artifactId>
+          <version>1.5.4-RELEASE</version>
+          <scope>provided</scope>
+      </dependency>
+  </dependencies>
+</project>
