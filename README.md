@@ -67,17 +67,7 @@ CodeLib has a full documented API. [View the Wiki here](https://github.com/JWein
 
 This project is licensed under the [GNU GPL v3 License](https://www.gnu.org/licenses/gpl-3.0.html).
 
----
 
-## ☕ Support & donations
-
-If you want to help me maintaining this project, please consider donating:
-
-<a href='https://ko-fi.com/R5R41DYA9C' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-
-Please write me your GitHub username, so I'm able to add you as a sponsor to this page.
-
----
 
 ## ❤️ These amazing people make my projects big!
 
