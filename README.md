@@ -9,8 +9,6 @@ After years of private development for the CodeBlocksMC network, CodeLib is now 
 Feel free to open issues, contribute, and build something great together!
 
 
----
-
 ## 🌟 Features
 - 🎨 Advanced GUI Builder
 - 🎮 Item Builder with armor trims, colors, potion support and so much more!
@@ -19,13 +17,11 @@ Feel free to open issues, contribute, and build something great together!
 - 🗺️ World management
 - 💻 Advanced tab completing API
 
----
 
 ## 🧩 Compatibility
 CodeLib supports Spigot, Paper, and all their forks natively.
 For proxy support, only Velocity is currently supported.
 
----
 
 ## ⚙️ How to use
 Add the CodeBlocksMC Repository to your project:
@@ -56,17 +52,14 @@ implementation "de.codeblocksmc.codelib:CodeLib:3.3.1"
 
 You're all set – start building with CodeLib now!
 
----
 
 ## 🔌 API
 CodeLib has a full documented API. [View the Wiki here](https://github.com/JWeinelt/codelib/wiki) or [Look at the Java Docs](https://docs.julianweinelt.de/codelib).
 
-----------
 
 ## 🤝 License
 
 This project is licensed under the [GNU GPL v3 License](https://www.gnu.org/licenses/gpl-3.0.html).
-
 
 
 ## ❤️ These amazing people make my projects big!
