@@ -53,9 +53,9 @@ implementation "de.codeblocksmc.codelib:CodeLib:3.3.1"
 You're all set – start building with CodeLib now!
 
 ## 🛫 Planned features
-- [] Game management
-- [] Map management
-- [] Change CodeLib to running plugin
+- [ ] Game management
+- [ ] Map management
+- [ ] Change CodeLib to running plugin
 
 ## 🔌 API
 CodeLib has a full documented API. [View the Wiki here](https://github.com/JWeinelt/codelib/wiki) or [Look at the Java Docs](https://docs.julianweinelt.de/codelib).
