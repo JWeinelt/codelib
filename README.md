@@ -39,7 +39,7 @@ maven {
 }
 ```
 Then, import CodeLib as a dependency:
-```XML
+```XML [Maven]
 <dependency>
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
@@ -52,6 +52,10 @@ implementation "de.codeblocksmc.codelib:CodeLib:3.3.1"
 
 You're all set – start building with CodeLib now!
 
+## 🛫 Planned features
+- [] Game management
+- [] Map management
+- [] Change CodeLib to running plugin
 
 ## 🔌 API
 CodeLib has a full documented API. [View the Wiki here](https://github.com/JWeinelt/codelib/wiki) or [Look at the Java Docs](https://docs.julianweinelt.de/codelib).
