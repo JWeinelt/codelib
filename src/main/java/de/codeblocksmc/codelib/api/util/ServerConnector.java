@@ -2,7 +2,6 @@ package de.codeblocksmc.codelib.api.util;
 
 import de.simonsator.partyandfriends.spigot.api.pafplayers.PAFPlayerManager;
 import de.simonsator.partyandfriends.spigot.api.party.PartyManager;
-import io.github.leonardosnt.bungeechannelapi.BungeeChannelApi;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * This class handles the connection of players to available servers, taking into account party-related restrictions.
  * It ensures that players cannot join a game while being in a party, unless they are the party leader.
- * The class communicates with BungeeCord via the {@link BungeeChannelApi} to search for available servers and connect players.
+ * The class communicates with BungeeCord via the {@link de.codeblocksmc.codelib.api.util.BungeeChannelApi} to search for available servers and connect players.
  * <p>
  * It also integrates with the PartyAndFriends plugin to check if the player is in a party and if they are the leader.
  * If the player is in a party but not the leader, they will not be able to join the server.
