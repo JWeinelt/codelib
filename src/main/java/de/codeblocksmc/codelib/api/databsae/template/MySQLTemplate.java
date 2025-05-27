@@ -1,4 +1,6 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.databsae.template;
+
+import de.codeblocksmc.codelib.api.databsae.DatabaseObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
