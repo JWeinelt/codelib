@@ -1,6 +1,6 @@
 # ⚙️CodeLib: super advanced Bukkit and Velocity API
 
-![Version](https://img.shields.io/badge/Version-v3.3.1-green)![Update](https://img.shields.io/badge/Status-Stable-blue)[![Contribute](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](CONTRIBUTING.md)[![Build](https://github.com/JWeinelt/codelib/actions/workflows/maven.yml/badge.svg)](https://github.com/JWeinelt/codelib/actions/workflows/maven.yml)
+![Version](https://img.shields.io/badge/Version-v4.0.0--alpha1-green)![Update](https://img.shields.io/badge/Status-Stable-blue)[![Contribute](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](CONTRIBUTING.md)[![Build](https://github.com/JWeinelt/codelib/actions/workflows/maven.yml/badge.svg)](https://github.com/JWeinelt/codelib/actions/workflows/maven.yml)
 
 Welcome to the official repository of **CodeLib!**
 
