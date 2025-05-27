@@ -70,5 +70,5 @@ This project is licensed under the [GNU GPL v3 License](https://www.gnu.org/lice
 
 <a href="https://github.com/FirecraftGHG"><img src="https://github.com/FirecraftGHG.png" width="50" height="50" alt="@FirecraftGHG"/></a>
 <a href="https://github.com/PhastixTV"><img src="https://github.com/PhastixTV.png" width="50" height="50" alt="@PhastixTV"/></a>
-<a href="https://github.com/LeMichiii"><img src="https://github.com/LeMichiii.png" width="50" height="50" alt="@LeMichiii"/></a>
+<a href="https://github.com/zCreeperYT"><img src="https://github.com/zCreeperYT.png" width="50" height="50" alt="@zCreeperYT"/></a>
 <a href="https://github.com/ProJakob"><img src="https://github.com/ProJakob.png" width="50" height="50" alt="@ProJakob"/></a>
