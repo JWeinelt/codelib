@@ -1,5 +1,6 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.databsae.template;
 
+import de.codeblocksmc.codelib.api.databsae.DatabaseObject;
 import org.slf4j.Logger;
 
 import java.sql.Connection;
