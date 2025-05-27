@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.util;
+package de.codeblocksmc.codelib.api.util;
 
 import de.simonsator.partyandfriends.spigot.api.pafplayers.PAFPlayerManager;
 import de.simonsator.partyandfriends.spigot.api.party.PartyManager;

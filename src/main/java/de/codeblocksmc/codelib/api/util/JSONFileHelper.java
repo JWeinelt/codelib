@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.util;
+package de.codeblocksmc.codelib.api.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

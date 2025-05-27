@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.wrapping;
+package de.codeblocksmc.codelib.api.wrapping;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import net.kyori.adventure.text.Component;

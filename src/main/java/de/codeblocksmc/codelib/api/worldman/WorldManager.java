@@ -1,6 +1,5 @@
-package de.codeblocksmc.codelib.worldman;
+package de.codeblocksmc.codelib.api.worldman;
 
-import de.codeblocksmc.codelib.locations.LocationWrapper;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.permissions.Permission;

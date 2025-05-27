@@ -1,8 +1,6 @@
-package de.codeblocksmc.codelib.worldman;
+package de.codeblocksmc.codelib.api.worldman;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.data.type.TNT;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

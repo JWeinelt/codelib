@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.databsae;
+package de.codeblocksmc.codelib.api.databsae;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

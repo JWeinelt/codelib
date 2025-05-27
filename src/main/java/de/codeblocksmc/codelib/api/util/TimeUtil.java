@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.util;
+package de.codeblocksmc.codelib.api.util;
 
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
