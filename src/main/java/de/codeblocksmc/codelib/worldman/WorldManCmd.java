@@ -47,11 +47,16 @@ public class WorldManCmd implements CommandExecutor {
                 sender.sendMessage("§cInvalid arguments provided.");
             }
         } else if (args.length == 2) {
-            if (Bukkit.getWorld(args[1]) == null) {
+             if (args[0].equalsIgnoreCase("create")) {
+                 sender.sendMessage("§bCreating world §e" + args[1] + "...");
+                 manager.loadWorld(args[1]);
+                 sender.sendMessage("§aDone!");
+             }
+            if (Bukkit.getWorld(args[1]) == null && !args[1].equalsIgnoreCase("create")) {
                 sender.sendMessage("§cThe world §e" + args[1] + "§c seems not to exist. Is there a typo?");
                 return false;
             }
-            if (args[0].equalsIgnoreCase("create")) {
+            if (args[0].equalsIgnoreCase("load")) {
                 sender.sendMessage("§bLoading world §e" + args[1] + "...");
                 manager.loadWorld(args[1]);
                 sender.sendMessage("§aDone!");
