@@ -6,7 +6,7 @@
 
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
-  <version>3.3.9</version> <!-- When uploading, please also use LATEST -->
+  <version>3.4.0</version> <!-- When uploading, please also use LATEST -->
     <!-- 3.3.7 -->
   <packaging>jar</packaging>
 
