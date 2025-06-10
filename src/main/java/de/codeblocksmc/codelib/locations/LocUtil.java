@@ -2,8 +2,12 @@ package de.codeblocksmc.codelib.locations;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class for converting {@link LocationWrapper} and {@link Location} or wrapping {@link LocationSection}
@@ -52,6 +56,15 @@ public class LocUtil {
     public static LocationWrapper fromBukkit(Location l) {
         if (l.getWorld() == null) return null;
         return new LocationWrapper(l.getWorld().getName(), l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
+    }
+
+    @NotNull
+    public static Location fromWrapperReduced(@NotNull LocationWrapperReduced reduced, String world) {
+        return new Location(
+                Bukkit.getWorld(world),
+                reduced.getX(), reduced.getY(), reduced.getZ(),
+                reduced.getYaw(), reduced.getPitch()
+        );
     }
 
 
@@ -146,5 +159,33 @@ public class LocUtil {
         double distanceSquared = dx * dx + dy * dy + dz * dz;
 
         return distanceSquared <= (radius * radius);
+    }
+
+    public static LocationWrapper getMiddle(LocationSection section) {
+        String world = section.getL1().getWorld();  // Assuming both locations are in the same world
+        double middleX = (section.getL1().getX() + section.getL2().getX()) / 2;
+        double middleY = (section.getL1().getY() + section.getL2().getY()) / 2;
+        double middleZ = (section.getL1().getZ() + section.getL2().getZ()) / 2;
+        float middleYaw = (section.getL1().getYaw() + section.getL2().getYaw()) / 2;
+        float middlePitch = (section.getL1().getPitch() + section.getL2().getPitch()) / 2;
+
+        return new LocationWrapper(world, middleX, middleY, middleZ, middleYaw, middlePitch);
+    }
+
+    public static List<Material> getBlocksAround(Location location) {
+        List<Material> blocks = new ArrayList<>();
+        Location l = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
+
+        blocks.add(location.clone().add(0, 0, 1).getBlock().getType());
+        location = l;
+        blocks.add(location.clone().add(1, 0, 1).getBlock().getType());
+        blocks.add(location.clone().add(-1, 0, 1).getBlock().getType());
+        blocks.add(location.clone().add(0, 0, -1).getBlock().getType());
+        blocks.add(location.clone().add(1, 0, -1).getBlock().getType());
+        blocks.add(location.clone().add(-1, 0, -1).getBlock().getType());
+        blocks.add(location.clone().add(1, 0, 0).getBlock().getType());
+        blocks.add(location.clone().add(-1, 0, 0).getBlock().getType());
+
+        return blocks;
     }
 }

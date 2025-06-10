@@ -1,6 +1,6 @@
 package de.codeblocksmc.codelib.worldman;
 
-import de.codeblocksmc.codelib.AdvancedTabCompleter;
+import de.codeblocksmc.codelib.chat.AdvancedTabCompleter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -24,7 +24,7 @@ public class WorldManCom extends AdvancedTabCompleter implements TabCompleter {
         List<String> completions = new ArrayList<>();
 
         if (args.length <= 1) {
-            complete(completions, args[0], "teleport", "create", "remove", "list", "delete");
+            complete(completions, args[0], "teleport", "create", "remove", "list", "delete", "load");
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("teleport"))
                 complete(completions, args[1], manager.getLoadedWorlds());
