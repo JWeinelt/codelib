@@ -1,5 +1,7 @@
-package de.codeblocksmc.codelib.api.wrapping;
+package de.codeblocksmc.codelib.api.wrapping.adventure;
 
+import de.codeblocksmc.codelib.api.wrapping.ItemBuilder;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * Utility class for creating GUIs.
  * Provides flexibility for different inventory types and layouts.
+ * Adds support for Adventure API Components
  * @author JustCody
  * @version 1.1
  */
@@ -28,6 +31,20 @@ public class GuiBuilder {
         if (rows < 1 || rows > 6) {
             throw new IllegalArgumentException("Rows must be between 1 and 6.");
         }
+        this.inv = Bukkit.createInventory(null, rows * 9, Component.text(title));
+    }
+
+    /**
+     * Creates a chest GUI with the specified title and rows.
+     *
+     * @param title Title of the inventory as a {@link Component}.
+     * @param rows Number of rows (1-6, each row contains 9 slots).
+     * @throws IllegalArgumentException If rows are less than 1 or greater than 6.
+     */
+    public GuiBuilder(Component title, int rows) {
+        if (rows < 1 || rows > 6) {
+            throw new IllegalArgumentException("Rows must be between 1 and 6.");
+        }
         this.inv = Bukkit.createInventory(null, rows * 9, title);
     }
 
@@ -42,9 +59,22 @@ public class GuiBuilder {
         if (type == null) {
             throw new IllegalArgumentException("Inventory type cannot be null.");
         }
-        this.inv = Bukkit.createInventory(null, type, title);
+        this.inv = Bukkit.createInventory(null, type, Component.text(title));
     }
 
+    /**
+     * Creates a GUI with the specified {@link InventoryType} and title.
+     *
+     * @param type The inventory type.
+     * @param title The title of the inventory as a {@link Component}.
+     * @throws IllegalArgumentException If the inventory type cannot be viewed.
+     */
+    public GuiBuilder(InventoryType type, Component title) {
+        if (type == null) {
+            throw new IllegalArgumentException("Inventory type cannot be null.");
+        }
+        this.inv = Bukkit.createInventory(null, type, title);
+    }
 
     /**
      * Sets an item in the specified slot.
