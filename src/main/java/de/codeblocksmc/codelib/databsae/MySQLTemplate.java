@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author JustCody
  * @version 1.0
  */
-public class MySQLTemplate extends DatabaseObject {
+public abstract class MySQLTemplate extends DatabaseObject {
 
     // The connection object to the MySQL database
     public Connection conn;
@@ -84,4 +84,14 @@ public class MySQLTemplate extends DatabaseObject {
             log.warning("MySQL connection check failed: " + e.getMessage());
         }
     }
+
+    public void disconnect() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            log.severe(e.getMessage());
+        }
+    }
+
+    public abstract void afterSuccessfulConnection();
 }
