@@ -21,9 +21,10 @@ import java.util.Objects;
  * <p>This class allows easy configuration of items with custom properties such as display names,
  * lore, enchantments, item flags, and more.</p>
  *
- * @author JustCody
- * @version 1.1
+ * @author Julian Weinelt
+ * @version 1.3
  */
+@SuppressWarnings("Deprecation")
 public class ItemBuilder {
 
     private ItemStack stack;
