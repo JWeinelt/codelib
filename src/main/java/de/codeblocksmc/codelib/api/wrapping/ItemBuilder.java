@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author Julian Weinelt
  * @version 1.3
  */
-@SuppressWarnings("Deprecation")
+@SuppressWarnings("deprecation")
 public class ItemBuilder {
 
     private final ItemStack stack;
