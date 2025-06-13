@@ -1,5 +1,6 @@
 package de.codeblocksmc.codelib;
 
+import de.codeblocksmc.codelib.commands.CodeLibCommand;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -36,7 +37,8 @@ public class CodeLib extends JavaPlugin {
         log.info("Starting CodeLib v" + version);
         checkServerVersion();
         checkForCaesar();
-
+        log.info("Registering commands...");
+        getCommand("codelib").setExecutor(new CodeLibCommand());
     }
 
     @Override
@@ -85,6 +87,8 @@ public class CodeLib extends JavaPlugin {
         log.info("Checking availability of Caesar...");
         if (pluginManager.getPlugin("CaesarConnector") != null) {
             log.info("Caesar has been detected. Registering internal expansions...");
+        } else {
+            log.warning("Caesar could not be found. Some features are not available!");
         }
     }
 }
