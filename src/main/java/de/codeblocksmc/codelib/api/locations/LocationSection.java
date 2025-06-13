@@ -2,6 +2,7 @@ package de.codeblocksmc.codelib.api.locations;
 
 import lombok.Getter;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a pair of two {@link LocationWrapper} instances defining the corners of a cuboid area.
@@ -33,7 +34,7 @@ public class LocationSection {
      * @param l1 The first corner as a {@link Location}.
      * @param l2 The second corner as a {@link Location}.
      */
-    public LocationSection(Location l1, Location l2) {
+    public LocationSection(@NotNull Location l1, @NotNull Location l2) {
         this.l1 = LocUtil.fromBukkit(l1);
         this.l2 = LocUtil.fromBukkit(l2);
     }
@@ -46,7 +47,7 @@ public class LocationSection {
      * @param l1 The first corner as a {@link LocationWrapper}.
      * @param l2 The second corner as a {@link LocationWrapper}.
      */
-    public LocationSection(LocationWrapper l1, LocationWrapper l2) {
+    public LocationSection(@NotNull LocationWrapper l1, @NotNull LocationWrapper l2) {
         this.l1 = l1;
         this.l2 = l2;
     }
@@ -57,7 +58,7 @@ public class LocationSection {
      * @param location The {@link LocationWrapper} to check.
      * @return {@code true} if the location is inside the area; {@code false} otherwise.
      */
-    public boolean contains(LocationWrapper location) {
+    public boolean contains(@NotNull LocationWrapper location) {
         double minX = Math.min(l1.getX(), l2.getX());
         double minY = Math.min(l1.getY(), l2.getY());
         double minZ = Math.min(l1.getZ(), l2.getZ());
