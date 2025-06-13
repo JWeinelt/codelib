@@ -1,7 +1,6 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.database;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class TableColumn {
     private ColumnType type;

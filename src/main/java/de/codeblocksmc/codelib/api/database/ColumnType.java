@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.database;
 
 public enum ColumnType {
     VARCHAR,
