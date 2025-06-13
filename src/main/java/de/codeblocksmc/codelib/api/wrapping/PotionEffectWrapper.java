@@ -18,7 +18,9 @@ public class PotionEffectWrapper {
 
 
     public static PotionEffect fromWrapper(PotionEffectWrapper w) {
-        return new PotionEffect(PotionEffectType.getByName(w.getType()), w.getDuration() * 20, w.getAmplifier());
+        PotionEffectType type1 = PotionEffectType.getByName(w.getType());
+        if (type1 == null) return null;
+        return new PotionEffect(type1, w.getDuration() * 20, w.getAmplifier());
     }
 
     public static PotionEffectWrapper fromBukkit(PotionEffect e) {
