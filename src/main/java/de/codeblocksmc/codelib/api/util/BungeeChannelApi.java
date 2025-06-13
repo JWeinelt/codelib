@@ -1,10 +1,3 @@
-/**
- * https://github.com/leonardosnt/bungeechannelapi
- *
- * Copyright (C) 2017 leonardosnt <leonrdsnt@gmail.com>
- * Licensed under the MIT License. See LICENSE file in the project root for full license information.
- */
-
 package de.codeblocksmc.codelib.api.util;
 
 import java.net.InetSocketAddress;
@@ -32,14 +25,14 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 /**
- * Documentation copied from https://www.spigotmc.org/wiki/bukkit-bungee-plugin-messaging-channel/
+ * Documentation copied from <a href="https://www.spigotmc.org/wiki/bukkit-bungee-plugin-messaging-channel/">here</a>
  *
  * @author leonardosnt (leonrdsnt@gmail.com)
  * @see <a href="https://www.spigotmc.org/wiki/bukkit-bungee-plugin-messaging-channel/">https://www.spigotmc.org/wiki/bukkit-bungee-plugin-messaging-channel/</a>
  */
 public class BungeeChannelApi {
 
-  private static WeakHashMap<Plugin, BungeeChannelApi> registeredInstances = new WeakHashMap<>();
+  private static final WeakHashMap<Plugin, BungeeChannelApi> registeredInstances = new WeakHashMap<>();
 
   private final PluginMessageListener messageListener;
   private final Plugin plugin;
