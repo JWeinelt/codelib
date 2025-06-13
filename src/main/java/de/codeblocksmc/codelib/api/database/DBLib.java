@@ -1,6 +1,6 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.database;
 
-import de.codeblocksmc.codelib.api.databsae.template.StorageTemplate;
+import de.codeblocksmc.codelib.api.database.template.StorageTemplate;
 import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 

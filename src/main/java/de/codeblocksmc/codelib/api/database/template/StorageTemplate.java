@@ -1,8 +1,8 @@
-package de.codeblocksmc.codelib.api.databsae.template;
+package de.codeblocksmc.codelib.api.database.template;
 
-import de.codeblocksmc.codelib.api.databsae.DBSchema;
-import de.codeblocksmc.codelib.api.databsae.DBTable;
-import de.codeblocksmc.codelib.api.databsae.StorageProvider;
+import de.codeblocksmc.codelib.api.database.DBSchema;
+import de.codeblocksmc.codelib.api.database.DBTable;
+import de.codeblocksmc.codelib.api.database.StorageProvider;
 import lombok.Getter;
 
 import java.sql.Connection;

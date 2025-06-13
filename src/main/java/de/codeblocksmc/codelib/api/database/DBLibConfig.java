@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.api.databsae;
+package de.codeblocksmc.codelib.api.database;
 
 import lombok.Builder;
 import lombok.Getter;

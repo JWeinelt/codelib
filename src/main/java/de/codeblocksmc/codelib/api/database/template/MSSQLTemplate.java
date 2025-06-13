@@ -1,6 +1,6 @@
-package de.codeblocksmc.codelib.api.databsae.template;
+package de.codeblocksmc.codelib.api.database.template;
 
-import de.codeblocksmc.codelib.api.databsae.DatabaseObject;
+import de.codeblocksmc.codelib.api.database.DatabaseObject;
 import lombok.Getter;
 
 import java.sql.Connection;
