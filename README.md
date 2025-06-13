@@ -8,6 +8,8 @@ Welcome to the official repository of **CodeLib!**
 After years of private development for the CodeBlocksMC network, CodeLib is now available to everyone!  
 Feel free to open issues, contribute, and build something great together!
 
+Join the official Discord server [here](https://dc.codeblocksmc.de)!
+
 
 ## 🌟 Features
 - 🎨 Advanced GUI Builder
