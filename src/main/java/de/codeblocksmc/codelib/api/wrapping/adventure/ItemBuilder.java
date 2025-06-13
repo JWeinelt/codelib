@@ -1,5 +1,7 @@
-package de.codeblocksmc.codelib.api.wrapping;
+package de.codeblocksmc.codelib.api.wrapping.adventure;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
@@ -26,7 +28,7 @@ import java.util.Objects;
  */
 public class ItemBuilder {
 
-    private ItemStack stack;
+    private final ItemStack stack;
     private ItemMeta meta;
 
     /**
@@ -52,14 +54,8 @@ public class ItemBuilder {
      * @param name The new display name.
      * @return This builder instance.
      */
-    public ItemBuilder displayname(String name) {
-        meta.setDisplayName(name);
-        return this;
-    }
-
-    public ItemBuilder material(Material material) {
-        if (material == Material.AIR) throw new IllegalArgumentException("Material cannot be null or AIR.");
-        stack = stack.withType(material);
+    public ItemBuilder displayname(Component name) {
+        meta.displayName(name);
         return this;
     }
 
@@ -80,8 +76,8 @@ public class ItemBuilder {
      * @param lore The lore lines to set.
      * @return This builder instance.
      */
-    public ItemBuilder lore(String... lore) {
-        meta.setLore(Arrays.asList(lore));
+    public ItemBuilder lore(Component... lore) {
+        meta.lore(Arrays.stream(lore).toList());
         return this;
     }
 
@@ -91,8 +87,8 @@ public class ItemBuilder {
      * @param lore The lore lines as a list.
      * @return This builder instance.
      */
-    public ItemBuilder lore(List<String> lore) {
-        meta.setLore(lore);
+    public ItemBuilder lore(List<Component> lore) {
+        meta.lore(lore);
         return this;
     }
 
@@ -149,6 +145,19 @@ public class ItemBuilder {
      */
     public ItemBuilder amount(int amount) {
         stack.setAmount(amount);
+        return this;
+    }
+
+    /**
+     * Applies a player profile to the item (for player heads).
+     *
+     * @param profile The {@link PlayerProfile} to set.
+     * @return This builder instance.
+     */
+    public ItemBuilder owner(PlayerProfile profile) {
+        if (meta instanceof SkullMeta skullMeta) {
+            skullMeta.setPlayerProfile(profile);
+        }
         return this;
     }
 
@@ -238,9 +247,9 @@ public class ItemBuilder {
      * @param title The title to set.
      * @return This builder instance.
      */
-    public ItemBuilder bookTitle(String title) {
+    public ItemBuilder bookTitle(Component title) {
         if (meta instanceof BookMeta bookMeta) {
-            bookMeta.setTitle(title);
+            bookMeta.title(title);
         }
         return this;
     }
@@ -251,9 +260,9 @@ public class ItemBuilder {
      * @param author The author to set.
      * @return This builder instance.
      */
-    public ItemBuilder bookAuthor(String author) {
+    public ItemBuilder bookAuthor(Component author) {
         if (meta instanceof BookMeta bookMeta) {
-            bookMeta.setAuthor(author);
+            bookMeta.author(author);
         }
         return this;
     }
@@ -264,9 +273,9 @@ public class ItemBuilder {
      * @param page The content of the page.
      * @return This builder instance.
      */
-    public ItemBuilder bookPage(String page) {
+    public ItemBuilder bookPage(Component page) {
         if (meta instanceof BookMeta bookMeta) {
-            bookMeta.addPage(page);
+            bookMeta.addPages(page);
         }
         return this;
     }
@@ -292,13 +301,5 @@ public class ItemBuilder {
     public ItemStack build() {
         stack.setItemMeta(meta);
         return stack;
-    }
-
-    public Material getMaterial() {
-        return stack.getType();
-    }
-
-    public int getAmount() {
-        return stack.getAmount();
     }
 }
