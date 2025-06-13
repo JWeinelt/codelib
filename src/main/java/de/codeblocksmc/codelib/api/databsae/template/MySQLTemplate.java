@@ -1,6 +1,10 @@
 package de.codeblocksmc.codelib.api.databsae.template;
 
-import de.codeblocksmc.codelib.api.databsae.DatabaseObject;
+import de.codeblocksmc.codelib.CodeLib;
+import de.codeblocksmc.codelib.api.databsae.DBLibConfig;
+import de.codeblocksmc.codelib.api.databsae.DBSchema;
+import de.codeblocksmc.codelib.api.databsae.DBTable;
+import de.codeblocksmc.codelib.api.databsae.StorageProvider;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,10 +20,7 @@ import java.util.logging.Logger;
  * @author JustCody
  * @version 1.0
  */
-public class MySQLTemplate extends DatabaseObject {
-
-    // The connection object to the MySQL database
-    public Connection conn;
+public abstract class MySQLTemplate extends StorageTemplate {
 
     // Logger for logging messages related to the connection
     public final Logger log;
@@ -42,12 +43,23 @@ public class MySQLTemplate extends DatabaseObject {
      * @param password Password for the given username.
      */
     public MySQLTemplate(Logger log, String host, int port, String database, String user, String password) {
+        super(StorageProvider.MYSQL);
         this.log = log;
         this.host = host;
         this.port = port;
         this.database = database;
         this.user = user;
         this.password = password;
+    }
+
+    public MySQLTemplate (DBLibConfig config) {
+        super(StorageProvider.MYSQL);
+        this.log = CodeLib.getInstance().getLog();
+        this.database = config.getDatabaseName();
+        this.user = config.getUsername();
+        this.password = config.getPassword();
+        this.host = config.getHost();
+        this.port = config.getPort();
     }
 
     /**
@@ -85,5 +97,23 @@ public class MySQLTemplate extends DatabaseObject {
             // Log any exceptions encountered while checking the connection status
             log.warning("MySQL connection check failed: " + e.getMessage());
         }
+    }
+
+    public void disconnect() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            log.warning("MySQL connection close failed: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public DBSchema getSchema(String name) {
+        return new DBSchema(name);
+    }
+
+    @Override
+    public DBTable getTable(String schema, String name) {
+        return null;
     }
 }
