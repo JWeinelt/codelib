@@ -1,8 +1,12 @@
 package de.codeblocksmc.codelib.api.databsae;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Builder
+@Getter
+@Setter
 public class DBLibConfig {
     private StorageProvider provider;
     private String host;
