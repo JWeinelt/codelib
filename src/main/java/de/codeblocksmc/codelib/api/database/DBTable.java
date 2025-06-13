@@ -15,6 +15,4 @@ public class DBTable {
             consumer.accept(column);
         }
     }
-
-
 }

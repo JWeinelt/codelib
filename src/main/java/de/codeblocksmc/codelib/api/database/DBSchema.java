@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBSchema {
+
     private final String name;
     private List<DBTable> tables = new ArrayList<>();
 
@@ -12,6 +13,10 @@ public class DBSchema {
     }
 
     public void registerTable(DBTable table) {
+        tables.add(table);
+    }
+
+    public void createTable(DBTable table) {
         tables.add(table);
     }
 }
