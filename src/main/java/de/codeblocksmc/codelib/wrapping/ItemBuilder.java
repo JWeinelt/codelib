@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 public class ItemBuilder {
 
-    private final ItemStack stack;
+    private ItemStack stack;
     private ItemMeta meta;
 
     /**
@@ -56,6 +56,12 @@ public class ItemBuilder {
      */
     public ItemBuilder displayname(String name) {
         meta.setDisplayName(name);
+        return this;
+    }
+
+    public ItemBuilder material(Material material) {
+        if (material == Material.AIR) throw new IllegalArgumentException("Material cannot be null or AIR.");
+        stack = stack.withType(material);
         return this;
     }
 
