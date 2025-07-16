@@ -308,4 +308,12 @@ public class ItemBuilder {
         stack.setItemMeta(meta);
         return stack;
     }
+
+    public Material getMaterial() {
+        return stack.getType();
+    }
+
+    public int getAmount() {
+        return stack.getAmount();
+    }
 }
