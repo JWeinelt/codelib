@@ -32,4 +32,6 @@ public class Configuration {
     @Setter(AccessLevel.NONE) @Getter(AccessLevel.NONE)
     private final String _INFO_DONT_TOUCH = "DO NOT CHANGE THESE VALUES!";
     private final String codeLibVersion = "4.1.0";
+    private final String configVersion = "1.2";
+    private final String buildNumber = "2025-09-05";
 }

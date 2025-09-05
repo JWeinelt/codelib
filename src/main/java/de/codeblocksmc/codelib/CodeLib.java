@@ -21,7 +21,9 @@ public class CodeLib extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        log = getLogger();
         instance = this;
+        pluginManager = getServer().getPluginManager();
     }
 
     @Override
