@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.locations;
+package de.codeblocksmc.codelib.api.locations;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

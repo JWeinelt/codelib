@@ -1,6 +1,6 @@
-package de.codeblocksmc.codelib.worldman;
+package de.codeblocksmc.codelib.api.worldman;
 
-import de.codeblocksmc.codelib.chat.AdvancedTabCompleter;
+import de.codeblocksmc.codelib.api.commands.AdvancedTabCompleter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class CodeLib extends JavaPlugin {
     @Getter
-    private static final String version = "4.0.0";
+    private static final String version = "4.1.0";
 
     @Getter
     private static CodeLib instance;

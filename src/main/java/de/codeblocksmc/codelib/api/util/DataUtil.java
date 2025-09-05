@@ -1,4 +1,4 @@
-package de.codeblocksmc.codelib.util;
+package de.codeblocksmc.codelib.api.util;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataUtil {
+    /**
+     * Check if String is a valid Integer
+     * @param s String to check
+     * @return {@code true} if valid Integer, {@code false} if not
+     */
     public static boolean isValidInt(String s) {
         try {
             int i = Integer.parseInt(s);
@@ -15,6 +20,11 @@ public class DataUtil {
         } catch (NumberFormatException ignored) {return false;}
     }
 
+    /**
+     * Check if String is a valid List of Integers
+     * @param a String to check
+     * @return {@code true} if valid List of Integers, {@code false} if not
+     */
     public static boolean isValidIntList(String a) {
         List<Integer> is = new ArrayList<>();
         for (String s : a.split(",")) {
@@ -23,6 +33,11 @@ public class DataUtil {
         return true;
     }
 
+    /**
+     * Convert String to List of Integers
+     * @param argument String to convert
+     * @return List of Integers
+     */
     public static List<Integer> convertDest(String argument) {
         List<Integer> is = new ArrayList<>();
         for (String s : argument.split(",")) {
@@ -31,6 +46,11 @@ public class DataUtil {
         return is;
     }
 
+    /**
+     * Get MD5 hash of a URL
+     * @param input URL to check
+     * @return MD5 hash of the URL
+     */
     public static String checkHashURL(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
