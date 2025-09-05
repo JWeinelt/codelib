@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-public class MSSQLTemplate extends DatabaseObject {
+public abstract class MSSQLTemplate extends DatabaseObject {
     @Getter
     public Connection conn;
     private final Logger log;
@@ -35,6 +35,7 @@ public class MSSQLTemplate extends DatabaseObject {
             conn = DriverManager.getConnection(CONNECTION_STRING, DB_USER, DB_PASSWORD);
             log.info("MSSQL Connection established.");
             conn.createStatement().execute("USE " + DB_NAME);
+            afterSuccessfulConnection();
             return conn;
         }
         catch(Exception ex) {
@@ -56,4 +57,6 @@ public class MSSQLTemplate extends DatabaseObject {
             log.severe(e.getMessage());
         }
     }
+
+    public abstract void afterSuccessfulConnection();
 }

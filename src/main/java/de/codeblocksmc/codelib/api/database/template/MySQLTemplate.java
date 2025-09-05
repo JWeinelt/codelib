@@ -1,6 +1,7 @@
-package de.codeblocksmc.codelib.api.databsae.template;
+package de.codeblocksmc.codelib.api.database.template;
 
-import de.codeblocksmc.codelib.api.databsae.DatabaseObject;
+
+import de.codeblocksmc.codelib.api.database.DatabaseObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -65,6 +66,30 @@ public abstract class MySQLTemplate extends DatabaseObject {
             // Establish a connection using the provided connection details
             conn = DriverManager.getConnection(DB_NAME, user, password);
 
+            afterSuccessfulConnection();
+        } catch (Exception ex) {
+            // Log any exception that occurs during the connection process
+            log.warning("MySQL connection failed: " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Establishes a connection to the MySQL server and creates a {@link Connection} object.
+     * This method loads the MySQL JDBC driver, attempts to connect to the database,
+     * and logs any exceptions if the connection fails.
+     * @param parameters Additional database parameters to append to the connection string.
+     */
+    public void connect(DatabaseParameters parameters) {
+        final String DB_NAME = "jdbc:mysql://"+host+":"+port+"/"+database+parameters.getParameters();
+
+        try {
+            // Load MySQL JDBC driver class
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish a connection using the provided connection details
+            conn = DriverManager.getConnection(DB_NAME, user, password);
+
+            afterSuccessfulConnection();
         } catch (Exception ex) {
             // Log any exception that occurs during the connection process
             log.warning("MySQL connection failed: " + ex.getMessage());
