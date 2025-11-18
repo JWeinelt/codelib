@@ -71,6 +71,27 @@ public class LocationSection {
     }
 
     /**
+     * Returns a random {@link LocationWrapper} inside this {@link LocationSection}.
+     *
+     * @return A random location within the cuboid area.
+     */
+    public LocationWrapper getRandomLocation() {
+        double minX = Math.min(l1.getX(), l2.getX());
+        double minY = Math.min(l1.getY(), l2.getY());
+        double minZ = Math.min(l1.getZ(), l2.getZ());
+
+        double maxX = Math.max(l1.getX(), l2.getX());
+        double maxY = Math.max(l1.getY(), l2.getY());
+        double maxZ = Math.max(l1.getZ(), l2.getZ());
+
+        double x = minX + Math.random() * (maxX - minX);
+        double y = minY + Math.random() * (maxY - minY);
+        double z = minZ + Math.random() * (maxZ - minZ);
+
+        return new LocationWrapper(l1.getWorld(), x, y, z, 0f, 0f);
+    }
+
+    /**
      * Provides a string representation of this {@link LocationSection}.
      *
      * @return A formatted string containing the details of both corners.
