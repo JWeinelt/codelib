@@ -63,6 +63,7 @@ public abstract class MySQLTemplate extends DatabaseObject {
             // Establish a connection using the provided connection details
             conn = DriverManager.getConnection(DB_NAME, user, password);
 
+            afterSuccessfulConnection();
         } catch (Exception ex) {
             // Log any exception that occurs during the connection process
             log.warning("MySQL connection failed: " + ex.getMessage());

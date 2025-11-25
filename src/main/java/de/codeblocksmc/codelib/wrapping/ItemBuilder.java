@@ -1,12 +1,15 @@
 package de.codeblocksmc.codelib.wrapping;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
@@ -28,8 +31,12 @@ import java.util.Objects;
  */
 public class ItemBuilder {
 
+    private HeadDatabaseAPI hapi = new HeadDatabaseAPI();
+
     private ItemStack stack;
     private ItemMeta meta;
+
+    private PotionMeta potionMeta;
 
     /**
      * Constructs an {@link ItemBuilder} with the specified {@link Material}.
@@ -46,6 +53,9 @@ public class ItemBuilder {
         }
         this.stack = new ItemStack(material);
         this.meta = stack.getItemMeta();
+        if (material.equals(Material.POTION) || material.equals(Material.SPLASH_POTION) || material.equals(Material.LINGERING_POTION)) {
+            potionMeta = (PotionMeta) stack.getItemMeta();
+        }
     }
 
     /**
@@ -61,7 +71,8 @@ public class ItemBuilder {
 
     public ItemBuilder material(Material material) {
         if (material == Material.AIR) throw new IllegalArgumentException("Material cannot be null or AIR.");
-        stack = stack.withType(material);
+        stack = new ItemStack(material);
+        meta = stack.getItemMeta();
         return this;
     }
 
@@ -200,9 +211,8 @@ public class ItemBuilder {
      * @return This builder instance.
      */
     public ItemBuilder potionColor(Color color) {
-        if (meta instanceof PotionMeta potionMeta) {
-            potionMeta.setColor(color);
-        }
+        potionMeta.setColor(color);
+        stack.setItemMeta(potionMeta);
         return this;
     }
 
@@ -213,9 +223,8 @@ public class ItemBuilder {
      * @return This builder instance.
      */
     public ItemBuilder potionEffect(PotionEffect effect) {
-        if (meta instanceof PotionMeta potionMeta) {
-            potionMeta.addCustomEffect(effect, true);
-        }
+        potionMeta.addCustomEffect(effect, true);
+        stack.setItemMeta(potionMeta);
         return this;
     }
 
@@ -226,11 +235,10 @@ public class ItemBuilder {
      * @return This builder instance.
      */
     public ItemBuilder potionEffects(PotionEffect... effects) {
-        if (meta instanceof PotionMeta potionMeta) {
-            for (PotionEffect effect : effects) {
-                potionMeta.addCustomEffect(effect, true);
-            }
+        for (PotionEffect effect : effects) {
+            potionMeta.addCustomEffect(effect, true);
         }
+        stack.setItemMeta(potionMeta);
         return this;
     }
 
@@ -299,6 +307,15 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder hdb(String id) {
+        ItemStack s = hapi.getItemHead(id);
+        PlayerProfile pr = ((SkullMeta) s.getItemMeta()).getPlayerProfile();
+        if (!(meta instanceof SkullMeta)) throw new IllegalStateException("The item must be a PLAYER_HEAD.");
+        ((SkullMeta) meta).setPlayerProfile(pr);
+        stack.setItemMeta(meta);
+        return this;
+    }
+
     /**
      * Builds the item and returns the {@link ItemStack}.
      *
@@ -306,6 +323,10 @@ public class ItemBuilder {
      */
     public ItemStack build() {
         stack.setItemMeta(meta);
+        Material material = stack.getType();
+        if (material.equals(Material.POTION) || material.equals(Material.SPLASH_POTION) || material.equals(Material.LINGERING_POTION)) {
+            potionMeta = (PotionMeta) stack.getItemMeta();
+        }
         return stack;
     }
 

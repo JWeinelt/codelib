@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * Template class for creating MySQL connections
  */
-public class MySQLTemplateVelocity extends DatabaseObject {
+public abstract class MySQLTemplateVelocity extends DatabaseObject {
 
     public Connection conn;
     public final Logger log;
@@ -50,6 +50,7 @@ public class MySQLTemplateVelocity extends DatabaseObject {
             Class.forName("com.mysql.cj.jdbc.Driver"); //Gets the driver class
 
             conn = DriverManager.getConnection(DB_NAME, user, password); //Gets a connection to the database using the details you provided.
+            afterSuccessfulConnection();
 
         }
         catch(Exception ex) {
@@ -67,4 +68,6 @@ public class MySQLTemplateVelocity extends DatabaseObject {
             log.warn(e.getMessage());
         }
     }
+
+    public abstract void afterSuccessfulConnection();
 }
