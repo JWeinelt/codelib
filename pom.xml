@@ -6,7 +6,7 @@
 
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
-  <version>3.6.1</version>
+  <version>3.6.2</version>
   <packaging>jar</packaging>
 
   <name>CodeLib</name>
