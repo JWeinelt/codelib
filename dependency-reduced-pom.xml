@@ -4,7 +4,7 @@
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
   <name>CodeLib</name>
-  <version>3.5.3</version>
+  <version>3.6.0</version>
   <build>
     <resources>
       <resource>
@@ -60,18 +60,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.38</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>de.simonsator</groupId>
-      <artifactId>spigot-party-api-for-party-and-friends</artifactId>
-      <version>1.0.7-RELEASE</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>de.simonsator</groupId>
-      <artifactId>Party-and-Friends-MySQL-Edition-Spigot-API</artifactId>
-      <version>1.6.2-RELEASE</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

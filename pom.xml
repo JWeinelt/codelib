@@ -6,7 +6,7 @@
 
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
-  <version>3.5.3</version> <!-- When uploading, please also use LATEST -->
+  <version>3.6.0</version> <!-- When uploading, please also use LATEST -->
     <!-- 3.4.0 -->
   <packaging>jar</packaging>
 
@@ -93,18 +93,6 @@
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>
           <version>1.18.38</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>de.simonsator</groupId>
-          <artifactId>spigot-party-api-for-party-and-friends</artifactId>
-          <version>1.0.7-RELEASE</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>de.simonsator</groupId>
-          <artifactId>Party-and-Friends-MySQL-Edition-Spigot-API</artifactId>
-          <version>1.6.2-RELEASE</version>
           <scope>provided</scope>
       </dependency>
       <!-- HeadDatabase-API -->
