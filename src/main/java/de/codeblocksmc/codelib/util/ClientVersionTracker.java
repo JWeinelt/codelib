@@ -70,7 +70,8 @@ public class ClientVersionTracker {
             case 769 -> "1.21.4";
             case 770 -> "1.21.5";
             case 771 -> "1.21.6";
-            case 772 -> "1.21.7";
+            case 772 -> "1.21.8";
+            case 773 -> "1.21.10";
             default -> "Unknown";
         };
 
