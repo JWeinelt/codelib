@@ -4,7 +4,7 @@
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
   <name>CodeLib</name>
-  <version>3.6.0</version>
+  <version>3.6.2</version>
   <build>
     <resources>
       <resource>
@@ -17,8 +17,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.0</version>
         <configuration>
-          <source>16</source>
-          <target>16</target>
+          <source>21</source>
+          <target>21</target>
         </configuration>
       </plugin>
       <plugin>
@@ -44,22 +44,18 @@
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
-    <repository>
-      <id>simonsators-repo</id>
-      <url>https://simonsator.de/repo/</url>
-    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
-      <version>1.20.4-R0.1-SNAPSHOT</version>
+      <version>1.21.6-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.38</version>
+      <version>1.18.42</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -71,7 +67,7 @@
   </dependencies>
   <distributionManagement>
     <repository>
-      <id>codeblocksmc-repo</id>
+      <id>unifiedvision-repo</id>
       <url>https://repo.codeblocksmc.de/releases</url>
     </repository>
   </distributionManagement>
