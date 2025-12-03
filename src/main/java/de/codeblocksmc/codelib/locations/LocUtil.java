@@ -3,6 +3,7 @@ package de.codeblocksmc.codelib.locations;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,10 +59,22 @@ public class LocUtil {
         return new LocationWrapper(l.getWorld().getName(), l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
     }
 
+
+    /**
+     * Converts a reduced location wrapper ({@link LocationWrapperReduced} to Bukkit's {@link Location} using the given world.
+     * <p><b>Note: </b>A reduced location wrapper does NOT contain a field for the world. It must be given separately to create
+     * a Location object from it.</p>
+     * It is mainly used for dynamic map systems where we won't need to store world data.
+     * @param reduced A {@link LocationWrapperReduced} object to convert
+     * @param world The name of a {@link World}, the world must exist and be loaded.
+     * @return A {@link Location} object
+     */
     @NotNull
     public static Location fromWrapperReduced(@NotNull LocationWrapperReduced reduced, String world) {
+        World w = Bukkit.getWorld(world);
+        if (w == null) throw new IllegalArgumentException("World " + world + " not found");
         return new Location(
-                Bukkit.getWorld(world),
+                w,
                 reduced.getX(), reduced.getY(), reduced.getZ(),
                 reduced.getYaw(), reduced.getPitch()
         );
