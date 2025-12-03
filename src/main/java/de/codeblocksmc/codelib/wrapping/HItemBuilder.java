@@ -1,6 +1,7 @@
 package de.codeblocksmc.codelib.wrapping;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -26,7 +27,9 @@ import java.util.Objects;
  * @author JustCody
  * @version 1.1
  */
-public class ItemBuilder {
+public class HItemBuilder {
+
+    private final HeadDatabaseAPI hapi = new HeadDatabaseAPI();
 
     private ItemStack stack;
     private ItemMeta meta;
@@ -34,13 +37,13 @@ public class ItemBuilder {
     private PotionMeta potionMeta;
 
     /**
-     * Constructs an {@link ItemBuilder} with the specified {@link Material}.
+     * Constructs an {@link HItemBuilder} with the specified {@link Material}.
      *
      * @param material The {@link Material} for the item.
      *
      * Note: Material with type AIR can be used, but may cause bugs.
      */
-    public ItemBuilder(Material material) {
+    public HItemBuilder(Material material) {
         Objects.requireNonNull(material, "Material cannot be null.");
         if (material == Material.AIR) {
             this.stack = new ItemStack(material);
@@ -59,12 +62,12 @@ public class ItemBuilder {
      * @param name The new display name.
      * @return This builder instance.
      */
-    public ItemBuilder displayname(String name) {
+    public HItemBuilder displayname(String name) {
         meta.setDisplayName(name);
         return this;
     }
 
-    public ItemBuilder material(Material material) {
+    public HItemBuilder material(Material material) {
         if (material == Material.AIR) throw new IllegalArgumentException("Material cannot be null or AIR.");
         stack = new ItemStack(material);
         meta = stack.getItemMeta();
@@ -77,7 +80,7 @@ public class ItemBuilder {
      * @param unbreakable Whether the item is unbreakable.
      * @return This builder instance.
      */
-    public ItemBuilder unbreakable(boolean unbreakable) {
+    public HItemBuilder unbreakable(boolean unbreakable) {
         meta.setUnbreakable(unbreakable);
         return this;
     }
@@ -88,7 +91,7 @@ public class ItemBuilder {
      * @param lore The lore lines to set.
      * @return This builder instance.
      */
-    public ItemBuilder lore(String... lore) {
+    public HItemBuilder lore(String... lore) {
         meta.setLore(Arrays.asList(lore));
         return this;
     }
@@ -99,7 +102,7 @@ public class ItemBuilder {
      * @param lore The lore lines as a list.
      * @return This builder instance.
      */
-    public ItemBuilder lore(List<String> lore) {
+    public HItemBuilder lore(List<String> lore) {
         meta.setLore(lore);
         return this;
     }
@@ -110,7 +113,7 @@ public class ItemBuilder {
      * @param data The custom model data.
      * @return This builder instance.
      */
-    public ItemBuilder customModelData(int data) {
+    public HItemBuilder customModelData(int data) {
         meta.setCustomModelData(data);
         return this;
     }
@@ -121,7 +124,7 @@ public class ItemBuilder {
      * @param flag The flag to add.
      * @return This builder instance.
      */
-    public ItemBuilder flag(ItemFlag flag) {
+    public HItemBuilder flag(ItemFlag flag) {
         meta.addItemFlags(flag);
         return this;
     }
@@ -132,7 +135,7 @@ public class ItemBuilder {
      * @param flags The flags to add.
      * @return This builder instance.
      */
-    public ItemBuilder flags(ItemFlag... flags) {
+    public HItemBuilder flags(ItemFlag... flags) {
         meta.addItemFlags(flags);
         return this;
     }
@@ -144,7 +147,7 @@ public class ItemBuilder {
      * @param level The level of the enchantment.
      * @return This builder instance.
      */
-    public ItemBuilder enchant(Enchantment enchantment, int level) {
+    public HItemBuilder enchant(Enchantment enchantment, int level) {
         meta.addEnchant(enchantment, level, true);
         return this;
     }
@@ -155,7 +158,7 @@ public class ItemBuilder {
      * @param amount The new amount.
      * @return This builder instance.
      */
-    public ItemBuilder amount(int amount) {
+    public HItemBuilder amount(int amount) {
         stack.setAmount(amount);
         return this;
     }
@@ -166,7 +169,7 @@ public class ItemBuilder {
      * @param profile The {@link PlayerProfile} to set.
      * @return This builder instance.
      */
-    public ItemBuilder owner(PlayerProfile profile) {
+    public HItemBuilder owner(PlayerProfile profile) {
         if (meta instanceof SkullMeta skullMeta) {
             skullMeta.setPlayerProfile(profile);
         }
@@ -179,7 +182,7 @@ public class ItemBuilder {
      * @param trim The {@link ArmorTrim} to apply.
      * @return This builder instance.
      */
-    public ItemBuilder armorTrim(ArmorTrim trim) {
+    public HItemBuilder armorTrim(ArmorTrim trim) {
         if (meta instanceof ArmorMeta armorMeta) {
             armorMeta.setTrim(trim);
         }
@@ -192,7 +195,7 @@ public class ItemBuilder {
      * @param color The {@link Color} to apply.
      * @return This builder instance.
      */
-    public ItemBuilder leatherColor(Color color) {
+    public HItemBuilder leatherColor(Color color) {
         if (meta instanceof LeatherArmorMeta leatherArmorMeta) {
             leatherArmorMeta.setColor(color);
         }
@@ -205,7 +208,7 @@ public class ItemBuilder {
      * @param color The {@link Color} to apply.
      * @return This builder instance.
      */
-    public ItemBuilder potionColor(Color color) {
+    public HItemBuilder potionColor(Color color) {
         potionMeta.setColor(color);
         stack.setItemMeta(potionMeta);
         return this;
@@ -217,7 +220,7 @@ public class ItemBuilder {
      * @param effect The {@link PotionEffect} to add.
      * @return This builder instance.
      */
-    public ItemBuilder potionEffect(PotionEffect effect) {
+    public HItemBuilder potionEffect(PotionEffect effect) {
         potionMeta.addCustomEffect(effect, true);
         stack.setItemMeta(potionMeta);
         return this;
@@ -229,7 +232,7 @@ public class ItemBuilder {
      * @param effects The potion effects to add.
      * @return This builder instance.
      */
-    public ItemBuilder potionEffects(PotionEffect... effects) {
+    public HItemBuilder potionEffects(PotionEffect... effects) {
         for (PotionEffect effect : effects) {
             potionMeta.addCustomEffect(effect, true);
         }
@@ -243,7 +246,7 @@ public class ItemBuilder {
      * @param instrument The {@link MusicInstrument} to set.
      * @return This builder instance.
      */
-    public ItemBuilder musicInstrument(MusicInstrument instrument) {
+    public HItemBuilder musicInstrument(MusicInstrument instrument) {
         if (meta instanceof MusicInstrumentMeta musicMeta) {
             musicMeta.setInstrument(instrument);
         }
@@ -256,7 +259,7 @@ public class ItemBuilder {
      * @param title The title to set.
      * @return This builder instance.
      */
-    public ItemBuilder bookTitle(String title) {
+    public HItemBuilder bookTitle(String title) {
         if (meta instanceof BookMeta bookMeta) {
             bookMeta.setTitle(title);
         }
@@ -269,7 +272,7 @@ public class ItemBuilder {
      * @param author The author to set.
      * @return This builder instance.
      */
-    public ItemBuilder bookAuthor(String author) {
+    public HItemBuilder bookAuthor(String author) {
         if (meta instanceof BookMeta bookMeta) {
             bookMeta.setAuthor(author);
         }
@@ -282,7 +285,7 @@ public class ItemBuilder {
      * @param page The content of the page.
      * @return This builder instance.
      */
-    public ItemBuilder bookPage(String page) {
+    public HItemBuilder bookPage(String page) {
         if (meta instanceof BookMeta bookMeta) {
             bookMeta.addPages(Component.text(page));
         }
@@ -295,10 +298,19 @@ public class ItemBuilder {
      * @param variant The {@link Axolotl.Variant} to set.
      * @return This builder instance.
      */
-    public ItemBuilder axolotl(Axolotl.Variant variant) {
+    public HItemBuilder axolotl(Axolotl.Variant variant) {
         if (meta instanceof AxolotlBucketMeta axolotlMeta) {
             axolotlMeta.setVariant(variant);
         }
+        return this;
+    }
+
+    public HItemBuilder hdb(String id) {
+        ItemStack s = hapi.getItemHead(id);
+        PlayerProfile pr = ((SkullMeta) s.getItemMeta()).getPlayerProfile();
+        if (!(meta instanceof SkullMeta)) throw new IllegalStateException("The item must be a PLAYER_HEAD.");
+        ((SkullMeta) meta).setPlayerProfile(pr);
+        stack.setItemMeta(meta);
         return this;
     }
 
