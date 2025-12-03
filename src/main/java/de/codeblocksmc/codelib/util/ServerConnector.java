@@ -1,7 +1,5 @@
 package de.codeblocksmc.codelib.util;
 
-import de.simonsator.partyandfriends.spigot.api.pafplayers.PAFPlayerManager;
-import de.simonsator.partyandfriends.spigot.api.party.PartyManager;
 import io.github.leonardosnt.bungeechannelapi.BungeeChannelApi;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -63,11 +61,7 @@ public class ServerConnector {
      */
     public void connect(Player player, String servername) {
         // Check if the player is in a party and not the leader
-        if (PartyManager.getInstance().getParty(PAFPlayerManager.getInstance().getPlayer(player.getUniqueId())) != null &&
-                !PartyManager.getInstance().getParty(PAFPlayerManager.getInstance().getPlayer(player.getUniqueId())).getLeader().equals(PAFPlayerManager.getInstance().getPlayer(player.getUniqueId()))) {
-            player.sendMessage("§cSorry, you can't join a game while being in a party.");
-            return;
-        }
+        //TODO: Use new party system
 
         // Notify the player that the search for a free server is starting
         player.sendMessage(prefix + "§aLooking for free server in §e" + servername + "§a...");
