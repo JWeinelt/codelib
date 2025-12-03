@@ -8,12 +8,15 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Map;
+
 /**
  * Utility class for creating GUIs.
  * Provides flexibility for different inventory types and layouts.
  * @author JustCody
  * @version 1.1
  */
+@SuppressWarnings("unused")
 public class GuiBuilder {
 
     private final Inventory inv;
@@ -72,6 +75,87 @@ public class GuiBuilder {
             throw new IllegalArgumentException("Inventory type cannot be null.");
         }
         this.inv = Bukkit.createInventory(null, type, title);
+    }
+
+    /**
+     * Fill the gui using a pattern of {@link Material}s.
+     * <p>Example:</p>
+     * <p>When using the pattern <code>XX YYY XX</code> with the Mapping <code>X = STONE_BUTTON</code>
+     * and <code>Y = GRASS_BLOCK</code>, the line will look like this:</p>
+     * <p>Stone button, Stone button, nothing, Grass block, Grass block, Grass block, Nothing, Stone button, Stone button</p>
+     *
+     * Example usage:
+     * <pre>{@code
+     *     pattern("XX YYY ZZ", Map.of('X', Material.STONE_BUTTON, 'Y', Material.GRASS_BLOCK, 'Z', Material.GOLDEN_SWORD));
+     * }</pre>
+     *
+     * @param line1 The pattern for the first line
+     * @param pattern The pattern, as a {@link Map} object
+     */
+    public GuiBuilder pattern(String line1, Map<Character, Material> pattern) {
+        if (line1.length() > 9) throw new IllegalArgumentException("Line length must be between 1 and 9.");
+
+        String[] lines = new String[]{line1};
+        fillPattern(lines, pattern);
+        return this;
+    }
+    /**
+     * Fill the gui using a pattern of {@link Material}s.
+     * <p>Example:</p>
+     * <p>When using the pattern <code>XX YYY XX</code> with the Mapping <code>X = STONE_BUTTON</code>
+     * and <code>Y = GRASS_BLOCK</code>, the line will look like this:</p>
+     * <p>Stone button, Stone button, nothing, Grass block, Grass block, Grass block, Nothing, Stone button, Stone button</p>
+     *
+     * Example usage:
+     * <pre>{@code
+     *     pattern("XX YYY ZZ", Map.of('X', Material.STONE_BUTTON, 'Y', Material.GRASS_BLOCK, 'Z', Material.GOLDEN_SWORD));
+     * }</pre>
+     *
+     * @param line1 The pattern for the first line
+     * @param line2 The pattern for the second line
+     * @param pattern The pattern, as a {@link Map} object
+     */
+    public GuiBuilder pattern(String line1, String line2, Map<Character, Material> pattern) {
+        String[] lines = new String[]{line1, line2};
+        fillPattern(lines, pattern);
+        return this;
+    }
+    public GuiBuilder pattern(String line1, String line2, String line3, Map<Character, Material> pattern) {
+        String[] lines = new String[]{line1, line2, line3};
+        fillPattern(lines, pattern);
+        return this;
+    }
+    public GuiBuilder pattern(String line1, String line2, String line3, String line4,
+                              Map<Character, Material> pattern) {
+        String[] lines = new String[]{line1, line2, line3, line4};
+        fillPattern(lines, pattern);
+        return this;
+    }
+    public GuiBuilder pattern(String line1, String line2, String line3, String line4, String line5,
+                              Map<Character, Material> pattern) {
+        String[] lines = new String[]{line1, line2, line3, line4, line5};
+        fillPattern(lines, pattern);
+        return this;
+    }
+    public GuiBuilder pattern(String line1, String line2, String line3, String line4, String line5, String line6,
+                              Map<Character, Material> pattern) {
+        String[] lines = new String[]{line1, line2, line3, line4, line5, line6};
+        fillPattern(lines, pattern);
+        return this;
+    }
+
+    private void fillPattern(String[] lines, Map<Character, Material> pattern) {
+        int idx = 0;
+        for (String line : lines) {
+            for (char c : line.toCharArray()) {
+                if (pattern.containsKey(c)) {
+                    Material mat = pattern.get(c);
+                    inv.setItem(idx, new ItemBuilder(mat).displayname(" ").build());
+                }
+                idx++;
+            }
+            idx++;
+        }
     }
 
     /**

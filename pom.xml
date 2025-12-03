@@ -6,8 +6,7 @@
 
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
-  <version>3.6.1</version> <!-- When uploading, please also use LATEST -->
-    <!-- 3.4.0 -->
+  <version>3.6.1</version>
   <packaging>jar</packaging>
 
   <name>CodeLib</name>
@@ -76,7 +75,7 @@
       <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
-          <version>1.20.4-R0.1-SNAPSHOT</version>
+          <version>1.21.6-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
       <dependency>
