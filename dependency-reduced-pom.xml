@@ -4,7 +4,7 @@
   <groupId>de.codeblocksmc.codelib</groupId>
   <artifactId>CodeLib</artifactId>
   <name>CodeLib</name>
-  <version>3.6.2</version>
+  <version>3.6.3</version>
   <build>
     <resources>
       <resource>
@@ -67,7 +67,7 @@
   </dependencies>
   <distributionManagement>
     <repository>
-      <id>unifiedvision-repo</id>
+      <id>unifiedvision-releases</id>
       <url>https://repo.codeblocksmc.de/releases</url>
     </repository>
   </distributionManagement>

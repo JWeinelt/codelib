@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CodeLib.iml" filepath="$PROJECT_DIR$/CodeLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CodeLib.iml" filepath="$PROJECT_DIR$/.idea/CodeLib.iml" />
     </modules>
   </component>
 </project>

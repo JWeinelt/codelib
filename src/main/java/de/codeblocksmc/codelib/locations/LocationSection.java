@@ -1,7 +1,10 @@
 package de.codeblocksmc.codelib.locations;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+
+import java.util.function.Consumer;
 
 /**
  * Represents a pair of two {@link LocationWrapper} instances defining the corners of a cuboid area.
@@ -34,6 +37,7 @@ public class LocationSection {
      * @param l2 The second corner as a {@link Location}.
      */
     public LocationSection(Location l1, Location l2) {
+        if (!l1.getWorld().getUID().equals(l2.getWorld().getUID())) throw new IllegalArgumentException("Locations must be in the same world!");
         this.l1 = LocUtil.fromBukkit(l1);
         this.l2 = LocUtil.fromBukkit(l2);
     }
@@ -47,6 +51,7 @@ public class LocationSection {
      * @param l2 The second corner as a {@link LocationWrapper}.
      */
     public LocationSection(LocationWrapper l1, LocationWrapper l2) {
+        if (!l1.getWorld().equals(l2.getWorld())) throw new IllegalArgumentException("Locations must be in the same world!");
         this.l1 = l1;
         this.l2 = l2;
     }
@@ -89,6 +94,22 @@ public class LocationSection {
         double z = minZ + Math.random() * (maxZ - minZ);
 
         return new LocationWrapper(l1.getWorld(), x, y, z, 0f, 0f);
+    }
+
+
+    /**
+     * Loop through every location in the section.
+     * @param action A {@link Consumer} for a {@link Location}
+     */
+    public void forLocation(Consumer<Location> action) {
+        for (double x = l1.getX(); x <= l2.getX(); x++) {
+            for (double y = l1.getY(); y <= l2.getY(); y++) {
+                for (double z = l1.getZ(); z <= l2.getZ(); z++) {
+                    Location l = new Location(Bukkit.getWorld(l1.getWorld()), x, y, z);
+                    action.accept(l);
+                }
+            }
+        }
     }
 
     /**
