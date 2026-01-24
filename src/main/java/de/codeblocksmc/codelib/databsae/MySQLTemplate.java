@@ -1,98 +1,88 @@
 package de.codeblocksmc.codelib.databsae;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Logger;
+import lombok.Getter;
 
 /**
- * Template class for creating MySQL connections.
- * This class provides methods for connecting to a MySQL database and checking the connection status.
- * It works in conjunction with {@link Logger} for logging any issues or errors during the connection process.
- * This is commonly used in Bukkit and Paper plugins for logging database-related activities.
+ * Abstract MySQL-specific implementation of {@link SQLTemplate}.
  *
  * @author JustCody
- * @version 1.0
+ * @author CrAfTs_ArMy
+ * @version 2.0
  */
-public abstract class MySQLTemplate extends DatabaseObject {
-
-    // The connection object to the MySQL database
-    public Connection conn;
-
-    // Logger for logging messages related to the connection
-    public final Logger log;
-
-    // MySQL connection details
-    public final String host;
-    public final int port;
-    public final String database;
-    public final String user;
-    public final String password;
+public abstract non-sealed class MySQLTemplate extends SQLTemplate {
 
     /**
-     * Constructor for initializing the MySQL connection template.
+     * Additional JDBC connection flags appended to the connection URL.
+     */
+    @Getter
+    private final String additionalFlags;
+
+    /**
+     * Creates a new MySQLTemplate without any additional connection flags.
      *
-     * @param log {@link Logger} of the plugin, typically used to log connection issues.
-     * @param host Hostname of the MySQL server (e.g., "localhost").
-     * @param port Port of the MySQL server. Default is 3306.
-     * @param database Name of the MySQL database to connect to.
-     * @param user Username to authenticate with the MySQL server.
-     * @param password Password for the given username.
+     * @param host     The database host
+     * @param port     The database port
+     * @param database The database name
+     * @param user     The database user
+     * @param password The database password
      */
-    public MySQLTemplate(Logger log, String host, int port, String database, String user, String password) {
-        this.log = log;
-        this.host = host;
-        this.port = port;
-        this.database = database;
-        this.user = user;
-        this.password = password;
+    public MySQLTemplate(String host, int port, String database, String user, String password) {
+        super(host, port, database, user, password);
+        this.additionalFlags = "";
     }
 
     /**
-     * Establishes a connection to the MySQL server and creates a {@link Connection} object.
-     * This method loads the MySQL JDBC driver, attempts to connect to the database,
-     * and logs any exceptions if the connection fails.
+     * Creates a new MySQLTemplate with additional JDBC connection flags.
+     * <p>
+     * Each flag should be provided in the format {@code key=value}.
+     * Multiple flags will be joined using {@code &}.
+     * </p>
+     *
+     * @param host            The database host
+     * @param port            The database port
+     * @param database        The database name
+     * @param user            The database user
+     * @param password        The database password
+     * @param additionalFlags Optional JDBC connection flags
      */
-    public void connect() {
-        final String DB_NAME = "jdbc:mysql://"+host+":"+port+"/"+database+"?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true";
-
-        try {
-            // Load MySQL JDBC driver class
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Establish a connection using the provided connection details
-            conn = DriverManager.getConnection(DB_NAME, user, password);
-
-            afterSuccessfulConnection();
-        } catch (Exception ex) {
-            // Log any exception that occurs during the connection process
-            log.warning("MySQL connection failed: " + ex.getMessage());
-        }
+    public MySQLTemplate(String host, int port, String database, String user, String password, String... additionalFlags) {
+        super(host, port, database, user, password);
+        this.additionalFlags = String.join("&", additionalFlags);
     }
 
     /**
-     * Checks the current MySQL connection to verify if it is still open and valid.
-     * If the connection is closed or null, this method will attempt to reconnect using {@link MySQLTemplate#connect()}.
+     * Returns the fully qualified MySQL JDBC driver class name.
+     *
+     * @return The MySQL JDBC driver class
      */
-    public void checkConnection() {
-        try {
-            if (conn == null || conn.isClosed()) {
-                // Attempt to reconnect if the connection is null or closed
-                connect();
-            }
-        } catch (SQLException e) {
-            // Log any exceptions encountered while checking the connection status
-            log.warning("MySQL connection check failed: " + e.getMessage());
-        }
+    @Override
+    protected String getDriverClass() {
+        return "com.mysql.cj.jdbc.Driver";
     }
 
-    public void disconnect() {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            log.severe(e.getMessage());
-        }
+    /**
+     * Builds the MySQL JDBC connection URL.
+     * <p>
+     * The URL follows the format:
+     * {@code jdbc:mysql://host:port/database}
+     * and optionally appends query parameters if additional flags are present.
+     * </p>
+     *
+     * @return The JDBC connection URL template
+     */
+    @Override
+    protected String getConnectionUrl() {
+        String url = "jdbc:mysql://%host%:%port%/%database%";
+        return url + (hasAdditionalFlags() ? "?" + additionalFlags : "");
     }
 
-    public abstract void afterSuccessfulConnection();
+    /**
+     * Checks whether any additional JDBC connection flags are defined.
+     *
+     * @return {@code true} if additional flags are present, otherwise {@code false}
+     */
+    public boolean hasAdditionalFlags() {
+        return additionalFlags != null && !additionalFlags.isBlank();
+    }
+
 }
