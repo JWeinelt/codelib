@@ -74,3 +74,5 @@ This project is licensed under the [GNU GPL v3 License](https://www.gnu.org/lice
 <a href="https://github.com/PhastixTV"><img src="https://github.com/PhastixTV.png" width="50" height="50" alt="@PhastixTV"/></a>
 <a href="https://github.com/zCreeperYT"><img src="https://github.com/zCreeperYT.png" width="50" height="50" alt="@zCreeperYT"/></a>
 <a href="https://github.com/ProJakob"><img src="https://github.com/ProJakob.png" width="50" height="50" alt="@ProJakob"/></a>
+<a href="https://github.com/liyanic"><img src="https://github.com/liyanic.png" width="50" height="50" alt="@liyanic"/></a>
+<a href="https://github.com/CrAfTsArMy"><img src="https://github.com/CrAfTsArMy.png" width="50" height="50" alt="@CrAfTsArMy"/></a>
