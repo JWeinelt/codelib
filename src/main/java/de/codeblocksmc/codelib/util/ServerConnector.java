@@ -1,11 +1,15 @@
 package de.codeblocksmc.codelib.util;
 
 import io.github.leonardosnt.bungeechannelapi.BungeeChannelApi;
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 /**
  * This class handles the connection of players to available servers, taking into account party-related restrictions.
@@ -18,9 +22,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * This class operates asynchronously, querying the BungeeCord server list and checking for server availability.
  *
  * @author JustCody
- * @version 1.0
+ * @author Try
+ * @version 1.1
  */
 public class ServerConnector {
+    private final ConcurrentHashMap<Pattern, Integer> serverMaxPlayerCount = new ConcurrentHashMap<>();
+
+    @Setter
+    @Getter
+    private int defaultMaxPlayerCount = 30;
 
     // Prefix that is used for messages sent to players
     private final String prefix;
@@ -56,59 +66,64 @@ public class ServerConnector {
      * <p>
      * The method will search for a server that is less than 30 players, and if found, it will connect the player to it.
      *
-     * @param player The player to be connected.
-     * @param servername The name of the server to connect to (partial match).
+     * @param player     The player to be connected.
+     * @param serverPattern A pattern to match server names.
+     * @param searchDescription The description which is show to the player when the searching is starting.
      */
-    public void connect(Player player, String servername) {
-        // Check if the player is in a party and not the leader
-        //TODO: Use new party system
+    public void connect(Player player, Pattern serverPattern, String searchDescription) {
 
-        // Notify the player that the search for a free server is starting
-        player.sendMessage(prefix + "§aLooking for free server in §e" + servername + "§a...");
+        //If the pattern is not known register it with the default player count.
+        if (!serverMaxPlayerCount.containsKey(serverPattern))
+            serverMaxPlayerCount.put(serverPattern, defaultMaxPlayerCount);
 
-        // Get the BungeeChannelApi instance to interact with BungeeCord
+
+        player.sendMessage(prefix + "§aLooking for free server in §e" + searchDescription + "§a...");
+
         BungeeChannelApi api = BungeeChannelApi.of(plugin);
 
-        // Run the connection task asynchronously
-        new BukkitRunnable() {
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            api.getServers().whenComplete((result, error) -> {
+                AtomicBoolean found = new AtomicBoolean(false);
 
-            @Override
-            public void run() {
-                // Fetch the list of available servers
-                api.getServers().whenComplete((result, error) -> {
-                    AtomicBoolean found = new AtomicBoolean(false);
 
-                    // Loop through the servers and check if one matches the specified servername
-                    for (String server : result) {
-                        if (!server.startsWith(servername)) continue;
+                for (String server : result) {
+                    if (!serverPattern.matcher(server).hasMatch()) continue;
 
-                        // Get the player count for the current server
-                        api.getPlayerCount(server).whenComplete((count, err) -> {
-                            // If the server has less than 30 players, connect the player
-                            if (count < 30) {
-                                api.connect(player, server);
-                                found.set(true);
-                            }
-                        });
+
+
+                    api.getPlayerCount(server).whenComplete((count, err) -> {
+
+                        if (count < serverMaxPlayerCount.get(serverPattern)) {
+                            api.connect(player, server);
+                            found.set(true);
+                        }
+                    });
+
+                    //stop the search if a server is found
+                    if(found.get())
+                        break;
+                }
+
+                //There is no reason to start a task if the server is found.
+                if (found.get()) return;
+
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+
+                    try {
+                        player.sendMessage(prefix + "§7We could not find a free server. Sorry for the inconvenience!");
+                    } catch (Exception e) {
+                        plugin.getLogger().warning(e.getMessage());
                     }
 
-                    // Notify the player if no free server was found after the search
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                if (!found.get()) {
-                                    player.sendMessage(prefix + "§7We could not find a free server. Sorry for the inconvenience!");
-                                }
-                            } catch (Exception e) {
-                                // Handle any errors when notifying the player
-                                plugin.getLogger().warning(e.getMessage());
-                            }
-                        }
-                    }.runTaskLater(plugin, 5);  // Delay to allow for the server search to complete
-                });
-            }
+                }, 5);
+            });
 
-        }.runTaskLater(plugin, 0);  // Run the task immediately
+        }, 0);
+
+    }
+
+
+    public void setServerMaxPlayerCount(Pattern serverPattern, int playerCount) {
+        this.serverMaxPlayerCount.put(serverPattern, playerCount);
     }
 }

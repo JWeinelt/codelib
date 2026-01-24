@@ -1,11 +1,19 @@
 package de.codeblocksmc.codelib.util;
 
+import com.google.common.util.concurrent.AtomicDouble;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+
+/*
+ * @author Try
+ * @version 1.1
+ */
 
 public class ParticleUtil {
     public static void spawnParticleCircle(Location center, double radius, Particle particle, int points) {
@@ -25,29 +33,25 @@ public class ParticleUtil {
         World world = center.getWorld();
         if (world == null) return;
 
-        new BukkitRunnable() {
-            int ticks = 0;
-            double angleOffset = 0;
 
-            @Override
-            public void run() {
-                if (ticks >= durationTicks) {
-                    cancel();
-                    return;
-                }
 
-                for (int i = 0; i < points; i++) {
-                    double angle = 2 * Math.PI * i / points + angleOffset;
-                    double x = Math.cos(angle) * radius;
-                    double z = Math.sin(angle) * radius;
-                    Location loc = center.clone().add(new Vector(x, 0, z));
-                    world.spawnParticle(particle, loc, 1, 0, 0, 0, 0);
-                }
 
-                angleOffset += angularVelocity;
-                ticks += 2;
+        final  AtomicDouble angleOffset = new AtomicDouble(0);
+
+        BukkitTask particleTask = Bukkit.getScheduler().runTaskTimer(plugin,()->{
+
+            for (int i = 0; i < points; i++) {
+                double angle = 2 * Math.PI * i / points + angleOffset.get();
+                double x = Math.cos(angle) * radius;
+                double z = Math.sin(angle) * radius;
+                Location loc = center.clone().add(new Vector(x, 0, z));
+                world.spawnParticle(particle, loc, 1, 0, 0, 0, 0);
             }
-        }.runTaskTimer(plugin, 0, 2L);
+            angleOffset.addAndGet(angularVelocity);
+
+        }, 0, 2L);
+
+        Bukkit.getScheduler().runTaskLater(plugin, particleTask::cancel, durationTicks);
     }
 
 
