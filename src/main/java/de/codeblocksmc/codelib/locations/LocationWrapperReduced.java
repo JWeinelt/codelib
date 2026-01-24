@@ -121,7 +121,6 @@ public class LocationWrapperReduced {
      *
      * @return a hash code based on the fields of the object.
      */
-
     @Override
     public int hashCode() {
         return Objects.hash(x, y, z, yaw, pitch);

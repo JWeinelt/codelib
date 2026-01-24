@@ -69,7 +69,7 @@ public class LocationWrapper extends LocationWrapperReduced {
         boolean result =  super.equals(obj);
 
         if (obj instanceof LocationWrapper other)
-           return result&& (world != null ? world.equals(other.world) : other.world == null);
+           return result&& (Objects.equals(world, other.world));
         else{
             return false;
         }
