@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 /**
+ * @author Try
  * A wrapper class for representing and saving positions in JSON files.
  *
  * <p>This class is designed to store positional data in a safe and
@@ -84,8 +87,8 @@ public class LocationWrapperReduced {
      */
     @Override
     public String toString() {
-        return String.format("LocationWrapper[world=%s, x=%.2f, y=%.2f, z=%.2f, yaw=%.2f, pitch=%.2f]",
-                "unknown", x, y, z, yaw, pitch);
+        return String.format("LocationWrapperReduced[ x=%.2f, y=%.2f, z=%.2f, yaw=%.2f, pitch=%.2f]",
+               x, y, z, yaw, pitch);
     }
 
     /**
@@ -98,15 +101,19 @@ public class LocationWrapperReduced {
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == null ) return false;
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
 
-        LocationWrapperReduced other = (LocationWrapperReduced) obj;
-        return Double.compare(other.x, x) == 0 &&
-                Double.compare(other.y, y) == 0 &&
-                Double.compare(other.z, z) == 0 &&
-                Float.compare(other.yaw, yaw) == 0 &&
-                Float.compare(other.pitch, pitch) == 0;
+        if(obj instanceof LocationWrapperReduced other){
+            return Double.compare(other.x, x) == 0 &&
+                    Double.compare(other.y, y) == 0 &&
+                    Double.compare(other.z, z) == 0 &&
+                    Float.compare(other.yaw, yaw) == 0 &&
+                    Float.compare(other.pitch, pitch) == 0;
+        }
+
+        return false;
+
     }
 
     /**
@@ -114,14 +121,9 @@ public class LocationWrapperReduced {
      *
      * @return a hash code based on the fields of the object.
      */
+
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + Double.hashCode(x);
-        result = 31 * result + Double.hashCode(y);
-        result = 31 * result + Double.hashCode(z);
-        result = 31 * result + Float.floatToIntBits(yaw);
-        result = 31 * result + Float.floatToIntBits(pitch);
-        return result;
+        return Objects.hash(x, y, z, yaw, pitch);
     }
 }
